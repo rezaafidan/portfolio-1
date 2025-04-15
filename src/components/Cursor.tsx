@@ -5,19 +5,13 @@ const Cursor = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [outerPosition, setOuterPosition] = useState({ x: 0, y: 0 });
     const [isVisible, setIsVisible] = useState(true);
-    const previousPositions = useRef<{x: number, y: number}[]>([]);
-    const maxPositions = 5;
+    const velocityRef = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setIsVisible(true);
             requestAnimationFrame(() => {
                 setPosition({ x: e.pageX, y: e.pageY });
-                
-                previousPositions.current.push({ x: e.pageX, y: e.pageY });
-                if (previousPositions.current.length > maxPositions) {
-                    previousPositions.current.shift();
-                }
             });
         };
 
@@ -39,40 +33,31 @@ const Cursor = () => {
     }, []);
 
     useEffect(() => {
-        const lerp = (start: number, end: number, factor: number) => {
-            return start + (end - start) * factor;
-        };
-
-        const smoothFactor = 0.08;
-        const momentumFactor = 0.3;
+        const springStrength = 0.15; // Kekuatan spring
+        const friction = 0.8; // Gesekan/perlambatan
+        const speed = 1.2; // Kecepatan pergerakan
 
         const animate = () => {
-            let momentumX = 0;
-            let momentumY = 0;
-            if (previousPositions.current.length > 0) {
-                const total = previousPositions.current.reduce((acc, pos) => {
-                    return {
-                        x: acc.x + pos.x,
-                        y: acc.y + pos.y
-                    };
-                }, { x: 0, y: 0 });
-                momentumX = total.x / previousPositions.current.length;
-                momentumY = total.y / previousPositions.current.length;
-            }
+            // Hitung jarak ke target
+            const dx = position.x - outerPosition.x;
+            const dy = position.y - outerPosition.y;
 
-            const targetX = position.x + (momentumX - position.x) * momentumFactor;
-            const targetY = position.y + (momentumY - position.y) * momentumFactor;
-            
-            const nextX = lerp(outerPosition.x, targetX, smoothFactor);
-            const nextY = lerp(outerPosition.y, targetY, smoothFactor);
-            setOuterPosition({ x: nextX, y: nextY });
+            // Update velocity dengan spring force
+            velocityRef.current.x = (velocityRef.current.x + dx * springStrength) * friction * speed;
+            velocityRef.current.y = (velocityRef.current.y + dy * springStrength) * friction * speed;
+
+            // Update posisi dengan velocity
+            setOuterPosition(prev => ({
+                x: prev.x + velocityRef.current.x,
+                y: prev.y + velocityRef.current.y
+            }));
 
             requestAnimationFrame(animate);
         };
 
         const animationFrame = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animationFrame);
-    }, [position, outerPosition]);
+    }, [position]);
 
     const innerStyle = {
         transform: `translate(${position.x}px, ${position.y}px)`

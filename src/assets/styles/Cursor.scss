@@ -14,12 +14,12 @@
 
     .cursor-outer {
         position: fixed;
-        width: 80px;
-        height: 80px;
+        width: 30px;
+        height: 30px;
         border: 2px solid #9d4edd;
         border-radius: 50%;
-        margin-left: -40px;
-        margin-top: -40px;
+        margin-left: -15px;
+        margin-top: -15px;
         will-change: transform;
         box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
         filter: blur(1px);
@@ -28,12 +28,12 @@
 
     .cursor-inner {
         position: fixed;
-        width: 8px;
-        height: 8px;
+        width: 4px;
+        height: 4px;
         background-color: #9d4edd;
         border-radius: 50%;
-        margin-left: -4px;
-        margin-top: -4px;
+        margin-left: -2px;
+        margin-top: -2px;
         will-change: transform;
         box-shadow: 0 0 10px rgba(157, 78, 221, 0.8);
         pointer-events: none;
