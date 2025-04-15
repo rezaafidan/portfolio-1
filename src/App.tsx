@@ -10,9 +10,7 @@ import {
 } from "./components";
 import FadeIn from './components/FadeIn';
 import GradientBackground from './components/GradientBackground';
-import Cursor from './components/Cursor';
 import './index.scss';
-import './assets/styles/Cursor.scss';
 
 function App() {
     const [mode, setMode] = useState<string>('dark');
@@ -31,7 +29,6 @@ function App() {
 
     return (
     <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
-        <Cursor />
         <GradientBackground />
         <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
         <FadeIn transitionDuration={700}>
