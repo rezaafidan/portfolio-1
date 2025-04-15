@@ -25,7 +25,7 @@ const GradientCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [targetPos, setTargetPos] = useState<Position>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Position>({ x: 0, y: 0 });
-  const [isHoveringLink, setIsHoveringLink] = useState(false); // State untuk hover link
+  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false); // Ganti nama state
   const animationFrameId = useRef<number | null>(null);
 
   // Faktor smoothing (semakin kecil semakin lambat/halus)
@@ -35,14 +35,15 @@ const GradientCursor: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       setTargetPos({ x: e.clientX, y: e.clientY });
 
-      // Deteksi hover link
+      // Deteksi hover link atau button
       let isHover = false;
       if (e.target instanceof Element) {
-        const closestLink = e.target.closest('a[href]');
-        isHover = closestLink !== null;
+        // Cari elemen interaktif terdekat (link atau button)
+        const closestInteractive = e.target.closest('a[href], button');
+        isHover = closestInteractive !== null;
       }
-      // Hanya update state jika berubah untuk menghindari re-render tidak perlu
-      setIsHoveringLink(prev => (prev !== isHover ? isHover : prev));
+      // Update state jika berubah (Fix linter error dengan tipe eksplisit)
+      setIsHoveringInteractive((prev: boolean) => (prev !== isHover ? isHover : prev));
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -58,8 +59,8 @@ const GradientCursor: React.FC = () => {
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
 
-          // Pilih parameter gradient berdasarkan state isHoveringLink
-          const gradientParams = isHoveringLink ? hoverLinkGradientStops : normalGradientStops;
+          // Pilih parameter gradient berdasarkan state isHoveringInteractive
+          const gradientParams = isHoveringInteractive ? hoverLinkGradientStops : normalGradientStops;
 
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
