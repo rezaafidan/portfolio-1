@@ -21,12 +21,16 @@ const clickedGradient = {
   transparentOuterStart: '2.2%', // Mulai transparan luar
 };
 
+// Durasi minimum efek klik (ms)
+const CLICK_EFFECT_DURATION = 150; 
+
 const GradientCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [targetPos, setTargetPos] = useState<Position>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Position>({ x: 0, y: 0 });
-  const [isMouseDown, setIsMouseDown] = useState(false); // State untuk klik mouse
+  const [isClickedEffect, setIsClickedEffect] = useState(false); // State untuk efek visual klik
   const animationFrameId = useRef<number | null>(null);
+  const clickTimeoutId = useRef<number | null>(null); // Ganti NodeJS.Timeout -> number
 
   // Faktor smoothing (semakin kecil semakin lambat/halus)
   const smoothFactor = 0.2;
@@ -36,11 +40,23 @@ const GradientCursor: React.FC = () => {
       // Update posisi target saat mouse bergerak
       setTargetPos({ x: e.clientX, y: e.clientY });
     };
+
     const handleMouseDown = () => {
-      setIsMouseDown(true);
+      // Jika ada timeout sebelumnya, hapus
+      if (clickTimeoutId.current) {
+        clearTimeout(clickTimeoutId.current);
+        clickTimeoutId.current = null;
+      }
+      setIsClickedEffect(true); // Langsung aktifkan efek
     };
+
     const handleMouseUp = () => {
-      setIsMouseDown(false);
+      // Mulai timer untuk menonaktifkan efek setelah durasi tertentu
+      // window.setTimeout mengembalikan number di browser
+      clickTimeoutId.current = window.setTimeout(() => {
+        setIsClickedEffect(false);
+        clickTimeoutId.current = null;
+      }, CLICK_EFFECT_DURATION);
     };
 
     // Tambahkan listener untuk mousedown dan mouseup
@@ -60,8 +76,8 @@ const GradientCursor: React.FC = () => {
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
 
-          // Pilih parameter gradient berdasarkan state isMouseDown
-          const gradientParams = isMouseDown ? clickedGradient : normalGradient;
+          // Pilih parameter gradient berdasarkan state isClickedEffect
+          const gradientParams = isClickedEffect ? clickedGradient : normalGradient;
 
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
@@ -89,6 +105,10 @@ const GradientCursor: React.FC = () => {
       window.removeEventListener('mouseup', handleMouseUp);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
+      }
+      // Pastikan timeout dibersihkan saat unmount
+      if (clickTimeoutId.current) {
+        clearTimeout(clickTimeoutId.current);
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
