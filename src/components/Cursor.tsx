@@ -71,11 +71,11 @@ const Cursor = () => {
     }, [position, outerPosition]); // Tambahkan outerPosition ke dependency array
 
     const innerStyle = {
-        transform: `translate(${position.x}px, ${position.y}px)`
+        transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`
     };
 
     const outerStyle = {
-        transform: `translate(${outerPosition.x}px, ${outerPosition.y}px)`
+        transform: `translate(${outerPosition.x}px, ${outerPosition.y}px) translate(-50%, -50%)`
     };
 
     return (
