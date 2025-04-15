@@ -52,8 +52,8 @@ function Project() {
                 <p>Cinema-themed keychain design for the 2nd anniversary of the 8th Batch's merchandise. Key design elements include a film reel, film projector, and clapperboard.</p>
             </div>
             <div className="project">
-                <a href="https://www.deviantart.com/rezaafidan/art/1183069268" target="_blank" rel="noopener noreferrer"><img src={mock05} className="zoom" alt="thumbnail" width="100%"/></a>
-                <a href="https://www.deviantart.com/rezaafidan/art/1183069268" target="_blank" rel="noopener noreferrer"><h2>Digital Comic</h2></a>
+                <a href="https://www.deviantart.com/rezaafidan/art/Einniv-Keychain-1183063645" target="_blank" rel="noopener noreferrer"><img src={mock05} className="zoom" alt="thumbnail" width="100%"/></a>
+                <a href="https://www.deviantart.com/rezaafidan/art/Einniv-Keychain-1183063645" target="_blank" rel="noopener noreferrer"><h2>Digital Comic</h2></a>
                 <p>The story of Kiranti, a talented young woman whose exceptional batik skills have reached international recognition.</p>
             </div>
             <div className="project">
