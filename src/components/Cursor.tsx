@@ -43,7 +43,7 @@ const Cursor = () => {
             return start + (end - start) * factor;
         };
 
-        const smoothFactor = 0.15;
+        const smoothFactor = 0.08;
         const momentumFactor = 0.3;
 
         const animate = () => {
