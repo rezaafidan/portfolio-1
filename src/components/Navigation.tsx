@@ -88,9 +88,9 @@ function Navigation({parentToChild, modeChange}: any) {
             <MenuIcon />
           </IconButton>
           {mode === 'dark' ? (
-            <LightModeIcon onClick={() => modeChange()}/>
+            <LightModeIcon className="mode-toggle-icon" onClick={() => modeChange()}/>
           ) : (
-            <DarkModeIcon onClick={() => modeChange()}/>
+            <DarkModeIcon className="mode-toggle-icon" onClick={() => modeChange()}/>
           )}
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
