@@ -99,10 +99,6 @@ p, a, h1, h2, h3, h4, h5, label, button {
 .light-mode {
   background-color: #f8f9fa;
 
-  .navigation-bar {
-    background-color: #f8f9fa;
-  }
-
   p, h1, h2, h3, h4, h5, label, button {
     color: #0d1116;
   }
@@ -178,4 +174,52 @@ p, a, h1, h2, h3, h4, h5, label, button {
       padding: 5% 5%;
     }
   }
+}
+
+/* == Styling Umum Navbar & Section Backgrounds == */
+#navigation, // AppBar
+#expertise, 
+#history,
+#projects,
+#contact,
+footer {
+  /* Efek Blur Latar Belakang */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative; /* Diperlukan untuk konteks stacking z-index */
+  z-index: 1; /* Pastikan di atas background utama */
+}
+
+#navigation {
+  /* Navbar harus sticky dan di atas segalanya */
+  position: sticky;
+  top: 0;
+  z-index: 1050; /* Z-index tinggi untuk navbar */
+  /* Buat AppBar transparan agar warna Toolbar/blur terlihat */
+  background-color: transparent !important; 
+}
+
+/* == Warna Latar Belakang Dark Mode (Default) == */
+#navigation .navigation-bar, // Target Toolbar di dalam AppBar
+#expertise, 
+#history,
+#projects,
+#contact,
+footer {
+  background-color: rgba(13, 17, 22, 0.75); /* Warna dasar gelap (#0d1116) + 75% opacity */
+}
+
+/* == Warna Latar Belakang Light Mode == */
+#navigation .navigation-bar,
+#expertise, 
+#history,
+#projects,
+#contact,
+footer {
+  background-color: rgba(248, 249, 250, 0.85); /* Warna dasar terang (#f8f9fa) + 85% opacity */
+}
+
+/* Pastikan AppBar light mode juga transparan */
+#navigation {
+   background-color: transparent !important; 
 }
