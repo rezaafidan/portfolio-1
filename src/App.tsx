@@ -34,13 +34,13 @@ function App() {
         <Cursor />
         <GradientBackground />
         <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
-        <FadeIn transitionDuration={700}>
+        {/* <FadeIn transitionDuration={700}> */ /* Dibungkus komentar sementara */}
             <Main/>
             <Expertise/>
             <Timeline/>
             <Project/>
             <Contact/>
-        </FadeIn>
+        {/* </FadeIn> */ /* Dibungkus komentar sementara */}
         <Footer />
     </div>
     );
