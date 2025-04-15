@@ -11,9 +11,9 @@ const GradientCursor: React.FC = () => {
         const y = (e.clientY / window.innerHeight) * 100;
         cursorRef.current.style.background = `radial-gradient(
           circle at ${x}% ${y}%,
-          rgba(0, 0, 0, 0.8) 0%,
-          rgba(0, 0, 0, 0.4) 2%,
-          rgba(0, 0, 0, 0) 4%
+          rgba(40, 0, 80, 0.95) 0%,
+          rgba(40, 0, 80, 0.8) 1%,
+          rgba(40, 0, 80, 0)   2%
         )`;
       }
     };
