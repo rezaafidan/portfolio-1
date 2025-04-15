@@ -1,15 +1,42 @@
 footer {
+    background-color: #0d1116;
+    padding: 20px 0;
     text-align: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    position: relative;
+    z-index: 1;
+    
+    .footer-icons {
+        margin-bottom: 10px;
+        a {
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: color .15s ease-in-out;
 
-    svg {
-        width: 1.1em !important;
-        height: 1.1em !important;
-        margin-right: 10px;
+            svg {
+              vertical-align: middle;
+            }
+
+            &:hover {
+                color: #5000ca;
+            }
+        }
+
+        svg:not([href]) { 
+          // Mungkin bisa diberi warna berbeda atau tanpa hover
+          // color: grey; 
+        }
     }
 
     p {
-        font-size: 0.8em;
+        margin: 0;
+        font-size: 0.9rem;
+        a {
+            font-weight: bold;
+            color: white;
+            &:hover {
+                color: #5000ca;
+            }
+        }
     }
 }

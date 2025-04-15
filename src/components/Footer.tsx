@@ -9,7 +9,8 @@ import {
   faSteam, 
   faDiscord,
   faGithub,
-  faLinkedin
+  faLinkedin,
+  faTree
 } from '@fortawesome/free-brands-svg-icons';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/Footer.scss'
@@ -28,6 +29,7 @@ function Footer() {
         <a href="https://osu.ppy.sh/users/9364311" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faCircleExclamation} /></a>
         <a href="https://steamcommunity.com/id/76561199789985658" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faSteam} /></a>
         <a href="https://discordapp.com/users/805926838257057812" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDiscord} /></a>
+        <a href="https://www.linktr.ee/rezaafidan/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faTree} /></a>
       </div>
       <p>A <a href="https://linktr.ee/rezaafidan" target="_blank" rel="noreferrer">Reza Afidan</a>'s Portfolio Website</p>
     </footer>
