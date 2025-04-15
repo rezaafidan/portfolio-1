@@ -1,0 +1,50 @@
+.cursor-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0; // Container tidak perlu ukuran, hanya sebagai parent
+    height: 0;
+    pointer-events: none; // Tidak mengganggu interaksi
+    z-index: 9999; // Layer paling depan
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+
+    &.hidden {
+        opacity: 0; // Efek fade out saat disembunyikan
+    }
+
+    .cursor-outer,
+    .cursor-inner {
+        position: absolute; // Posisi relatif terhadap container (yang tetap di 0,0)
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: transform; // Optimasi performa
+    }
+
+    .cursor-outer {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #9d4edd; // Sesuaikan warna jika perlu
+        box-shadow: 0 0 10px rgba(157, 78, 221, 0.4); // Sesuaikan warna jika perlu
+        background-color: rgba(157, 78, 221, 0.05); // Background semi-transparan
+    }
+
+    .cursor-inner {
+        width: 8px;
+        height: 8px;
+        background-color: #9d4edd; // Sesuaikan warna jika perlu
+        box-shadow: 0 0 8px rgba(157, 78, 221, 0.8); // Sesuaikan warna jika perlu
+        // z-index tidak perlu lagi karena urutan DOM sudah benar
+    }
+}
+
+// Anda mungkin masih perlu ini jika ada elemen lain yang menimpa pointer-events
+// .expertise-section,
+// .project-section,
+// .timeline-section,
+// .contact-section,
+// .about-section {
+//     * {
+//         pointer-events: auto;
+//     }
+// } 
