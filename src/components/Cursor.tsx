@@ -36,9 +36,9 @@ const Cursor = () => {
             return start + (end - start) * factor;
         };
 
-        // Faktor kecepatan untuk lingkaran luar (0.1 = 10% jarak per frame)
-        const outerSpeed = 0.1;
-        const stopThreshold = 0.1; // Ambang batas jarak untuk berhenti
+        // Faktor kecepatan untuk lingkaran luar
+        const outerSpeed = 0.15; // Kecepatan normal
+        const stopThreshold = 0.5; // Ambang batas jarak untuk berhenti
 
         const animate = () => {
             // Hitung jarak ke target
@@ -48,7 +48,10 @@ const Cursor = () => {
             
             // Jika jarak lebih kecil dari threshold, langsung snap ke posisi target
             if (distance < stopThreshold) {
-                setOuterPosition(position);
+                // Hanya set jika posisi belum sama persis untuk menghindari re-render tidak perlu
+                if (outerPosition.x !== position.x || outerPosition.y !== position.y) {
+                   setOuterPosition(position);
+                }
             } else {
                 // Interpolasi linear sederhana
                 const nextX = lerp(outerPosition.x, position.x, outerSpeed);
@@ -65,7 +68,7 @@ const Cursor = () => {
 
         const animationFrame = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animationFrame);
-    }, [position, outerPosition]);
+    }, [position, outerPosition]); // Tambahkan outerPosition ke dependency array
 
     const innerStyle = {
         transform: `translate(${position.x}px, ${position.y}px)`
