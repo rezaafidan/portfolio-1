@@ -37,38 +37,22 @@ const Cursor = () => {
         };
 
         // Faktor kecepatan untuk lingkaran luar
-        const outerSpeed = 0.15; // Kecepatan normal
-        const stopThreshold = 0.5; // Ambang batas jarak untuk berhenti
+        const outerSpeed = 0.3; // Sedikit lebih cepat dari 0.15
 
         const animate = () => {
-            // Hitung jarak ke target
-            const dx = position.x - outerPosition.x;
-            const dy = position.y - outerPosition.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+            // Interpolasi linear sederhana untuk membuat delay
+            const nextX = lerp(outerPosition.x, position.x, outerSpeed);
+            const nextY = lerp(outerPosition.y, position.y, outerSpeed);
             
-            // Jika jarak lebih kecil dari threshold, langsung snap ke posisi target
-            if (distance < stopThreshold) {
-                // Hanya set jika posisi belum sama persis untuk menghindari re-render tidak perlu
-                if (outerPosition.x !== position.x || outerPosition.y !== position.y) {
-                   setOuterPosition(position);
-                }
-            } else {
-                // Interpolasi linear sederhana
-                const nextX = lerp(outerPosition.x, position.x, outerSpeed);
-                const nextY = lerp(outerPosition.y, position.y, outerSpeed);
-                
-                setOuterPosition({
-                    x: nextX,
-                    y: nextY
-                });
-            }
+            // Langsung set posisi baru
+            setOuterPosition({ x: nextX, y: nextY });
 
             requestAnimationFrame(animate);
         };
 
         const animationFrame = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animationFrame);
-    }, [position, outerPosition]); // Tambahkan outerPosition ke dependency array
+    }, [position, outerPosition]);
 
     const innerStyle = {
         transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`
