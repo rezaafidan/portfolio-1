@@ -11,7 +11,7 @@ import {
   faGithub,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons';
-import { faCircleExclamation } from '@fortawesome/free-regular-svg-icons';
+import { faCircleExclamation } from '@fortawesome/pro-regular-svg-icons';
 import '../assets/styles/Footer.scss'
 
 function Footer() {
@@ -25,7 +25,7 @@ function Footer() {
         <a href="https://www.instagram.com/rezaafidan/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram} /></a>
         <a href="https://wa.me/6281238900703" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
         <a href="https://account.xbox.com/en-us/profile?gamertag=RpMEzaR" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faXbox} /></a>
-        <FontAwesomeIcon icon={faCircleExclamation} title="Info" />
+        <a href="https://osu.ppy.sh/users/9364311" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faCircleExclamation} /></a>
         <a href="https://steamcommunity.com/id/76561199789985658" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faSteam} /></a>
         <a href="https://discordapp.com/users/805926838257057812" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDiscord} /></a>
       </div>
