@@ -10,9 +10,8 @@ const Cursor = () => {
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setIsVisible(true);
-            requestAnimationFrame(() => {
-                setPosition({ x: e.pageX, y: e.pageY });
-            });
+            // Inner cursor langsung mengikuti posisi mouse
+            setPosition({ x: e.pageX, y: e.pageY });
         };
 
         const handleMouseLeave = (e: MouseEvent) => {
@@ -33,9 +32,10 @@ const Cursor = () => {
     }, []);
 
     useEffect(() => {
-        const springStrength = 0.15; // Kekuatan spring
-        const friction = 0.8; // Gesekan/perlambatan
-        const speed = 1.2; // Kecepatan pergerakan
+        // Animasi hanya untuk lingkaran luar
+        const springStrength = 0.1; // Kekuatan spring
+        const friction = 0.75; // Gesekan/perlambatan
+        const speed = 1.5; // Kecepatan pergerakan
 
         const animate = () => {
             // Hitung jarak ke target
@@ -57,7 +57,7 @@ const Cursor = () => {
 
         const animationFrame = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animationFrame);
-    }, [position]);
+    }, [position, outerPosition]);
 
     const innerStyle = {
         transform: `translate(${position.x}px, ${position.y}px)`
