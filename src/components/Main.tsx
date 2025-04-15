@@ -1,5 +1,6 @@
 import React from "react";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import '../assets/styles/Main.scss';
 
@@ -13,14 +14,14 @@ function Main() {
         </div>
         <div className="content">
           <div className="social_icons">
-            <a href="https://github.com/rezaafidan" target="_blank" rel="noopener noreferrer"><GitHubIcon/></a>
+            <a href="wa.me/6281238900703" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
             <a href="https://www.linkedin.com/in/rezaafidan/" target="_blank" rel="noopener noreferrer"><LinkedInIcon/></a>
           </div>
           <h1>Reza Afidan</h1>
           <p>Student at MAN Insan Cendekia Pekalongan</p>
 
           <div className="mobile_social_icons">
-            <a href="https://github.com/rezaafidan" target="_blank" rel="noopener noreferrer"><GitHubIcon/></a>
+            <a href="https://github.com/rezaafidan" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
             <a href="https://www.linkedin.com/in/rezaafidan/" target="_blank" rel="noopener noreferrer"><LinkedInIcon/></a>
           </div>
         </div>
