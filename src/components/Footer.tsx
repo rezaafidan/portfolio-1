@@ -9,10 +9,12 @@ import {
   faSteam, 
   faDiscord,
   faGithub,
-  faLinkedin,
-  faTree
+  faLinkedin
 } from '@fortawesome/free-brands-svg-icons';
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faCircleExclamation,
+  faTree }
+from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/Footer.scss'
 
 function Footer() {
