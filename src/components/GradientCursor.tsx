@@ -34,14 +34,14 @@ const GradientCursor: React.FC = () => {
         if (cursorRef.current) {
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
-          // Disesuaikan untuk outline yang lebih tipis
+          // Menggunakan putih solid untuk efek negasi maksimal dengan mix-blend-mode
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
             rgba(0, 0, 0, 0) 0%,      /* Tengah transparan */
-            rgba(0, 0, 0, 0) 1.0%,    /* Perbesar area transparan tengah -> 1.0% */
-            rgba(40, 0, 80, 0.95) 1.1%,/* Mulai ungu sedikit setelahnya */
-            rgba(40, 0, 80, 0.95) 1.5%,/* Akhiri ungu -> ketebalan 0.4% (1.5 - 1.1) */
-            rgba(40, 0, 80, 0) 1.6%   /* Mulai transparan luar */
+            rgba(0, 0, 0, 0) 1.0%,    /* Tetap transparan hingga 1.0% */
+            rgba(255, 255, 255, 1) 1.1%,/* Mulai putih solid (negasi) */
+            rgba(255, 255, 255, 1) 1.5%,/* Tetap putih solid */
+            rgba(0, 0, 0, 0) 1.6%   /* Mulai transparan luar */
           )`;
         }
         return { x: nextX, y: nextY };
