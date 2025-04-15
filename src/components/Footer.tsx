@@ -11,7 +11,7 @@ import {
   faGithub,
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons';
-import { faCircleExclamation } from '@fortawesome/pro-regular-svg-icons';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/Footer.scss'
 
 function Footer() {
