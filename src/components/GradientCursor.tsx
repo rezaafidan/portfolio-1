@@ -8,8 +8,8 @@ interface Position {
 
 // Definisikan parameter gradient untuk kedua state
 const normalGradientStops = {
-  transparentEnd: '1.0%',
-  outlineStart: '1.1%',
+  transparentEnd: '1.1%',
+  outlineStart: '1.2%',
   outlineEnd: '1.5%',
   transparentOuterStart: '1.6%',
 };

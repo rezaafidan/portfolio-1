@@ -8,8 +8,8 @@ interface Position {
 
 // Gradient stops untuk solid circle
 const solidGradientStops = {
-  solidEnd: '0.4%',
-  transparentStart: '0.5%',
+  solidEnd: '0.3%',
+  transparentStart: '0.4%',
 };
 
 const FastSolidCursor: React.FC = () => { // Nama komponen baru
