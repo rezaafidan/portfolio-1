@@ -6,10 +6,26 @@ interface Position {
   y: number;
 }
 
+// Definisikan parameter gradient untuk kedua state
+const normalGradient = {
+  transparentEnd: '1.0%',
+  outlineStart: '1.1%',
+  outlineEnd: '1.5%',
+  transparentOuterStart: '1.6%',
+};
+
+const clickedGradient = {
+  transparentEnd: '1.7%', // Lebih besar
+  outlineStart: '1.8%',   // Mulai setelahnya
+  outlineEnd: '2.1%',     // Akhir outline (sedikit lebih tebal: 0.3%)
+  transparentOuterStart: '2.2%', // Mulai transparan luar
+};
+
 const GradientCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [targetPos, setTargetPos] = useState<Position>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Position>({ x: 0, y: 0 });
+  const [isMouseDown, setIsMouseDown] = useState(false); // State untuk klik mouse
   const animationFrameId = useRef<number | null>(null);
 
   // Faktor smoothing (semakin kecil semakin lambat/halus)
@@ -20,8 +36,17 @@ const GradientCursor: React.FC = () => {
       // Update posisi target saat mouse bergerak
       setTargetPos({ x: e.clientX, y: e.clientY });
     };
+    const handleMouseDown = () => {
+      setIsMouseDown(true);
+    };
+    const handleMouseUp = () => {
+      setIsMouseDown(false);
+    };
 
+    // Tambahkan listener untuk mousedown dan mouseup
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
 
     // Fungsi untuk update animasi
     const updatePosition = () => {
@@ -34,14 +59,17 @@ const GradientCursor: React.FC = () => {
         if (cursorRef.current) {
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
-          // Menggunakan putih solid untuk efek negasi maksimal dengan mix-blend-mode
+
+          // Pilih parameter gradient berdasarkan state isMouseDown
+          const gradientParams = isMouseDown ? clickedGradient : normalGradient;
+
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
-            rgba(0, 0, 0, 0) 0%,      /* Tengah transparan */
-            rgba(0, 0, 0, 0) 1.0%,    /* Tetap transparan hingga 1.0% */
-            rgba(255, 255, 255, 1) 1.1%,/* Mulai putih solid (negasi) */
-            rgba(255, 255, 255, 1) 1.5%,/* Tetap putih solid */
-            rgba(0, 0, 0, 0) 1.6%   /* Mulai transparan luar */
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0) ${gradientParams.transparentEnd},
+            rgba(255, 255, 255, 1) ${gradientParams.outlineStart},
+            rgba(255, 255, 255, 1) ${gradientParams.outlineEnd},
+            rgba(0, 0, 0, 0) ${gradientParams.transparentOuterStart}
           )`;
         }
         return { x: nextX, y: nextY };
@@ -57,6 +85,8 @@ const GradientCursor: React.FC = () => {
     // Cleanup function
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
