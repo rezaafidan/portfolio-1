@@ -103,7 +103,11 @@ p, a, h1, h2, h3, h4, h5, label, button {
     background-color: #f8f9fa;
   }
 
-  p, a, h1, h2, h3, h4, h5, label, button {
+  p, h1, h2, h3, h4, h5, label, button {
+    color: #0d1116;
+  }
+
+  a {
     color: #0d1116;
   }
 
@@ -118,6 +122,11 @@ p, a, h1, h2, h3, h4, h5, label, button {
 
   .about-section {
     background-image: url("./assets/images/bg-light.png");
+
+    .social_icons a svg,
+    .mobile_social_icons a svg {
+      color: #333;
+    }
   }
 
   .skills-container svg {
@@ -147,6 +156,15 @@ p, a, h1, h2, h3, h4, h5, label, button {
 
   .flex-chips .chip-title {
     color: #0d1116;
+  }
+
+  footer .footer-icons a svg,
+  footer .footer-icons > svg {
+    color: #333;
+  }
+
+  footer .footer-icons a:hover {
+    color: #5000ca;
   }
 }
 
