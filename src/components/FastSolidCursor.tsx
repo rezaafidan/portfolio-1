@@ -16,6 +16,7 @@ const FastSolidCursor: React.FC = () => { // Nama komponen baru
   const cursorRef = useRef<HTMLDivElement>(null);
   const [targetPos, setTargetPos] = useState<Position>({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState<Position>({ x: 0, y: 0 });
+  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false); // State hover
   const animationFrameId = useRef<number | null>(null);
 
   // Faktor smoothing lebih cepat
@@ -24,6 +25,14 @@ const FastSolidCursor: React.FC = () => { // Nama komponen baru
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setTargetPos({ x: e.clientX, y: e.clientY });
+
+      // Deteksi hover pada elemen interaktif (sama seperti di GradientCursor)
+      let isHover = false;
+      if (e.target instanceof Element) {
+        const closestInteractive = e.target.closest('a[href], button, [role="button"], .mode-toggle-icon');
+        isHover = closestInteractive !== null;
+      }
+      setIsHoveringInteractive((prev: boolean) => (prev !== isHover ? isHover : prev));
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -39,13 +48,17 @@ const FastSolidCursor: React.FC = () => { // Nama komponen baru
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
 
-          // Style gradient solid (selalu sama)
-          cursorRef.current.style.background = `radial-gradient(
-            circle at ${xPercent}% ${yPercent}%,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 1) ${solidGradientStops.solidEnd},
-            rgba(0, 0, 0, 0) ${solidGradientStops.transparentStart}
-          )`;
+          // Set background jadi transparan jika hover, atau gradient solid jika tidak
+          if (isHoveringInteractive) {
+            cursorRef.current.style.background = 'transparent';
+          } else {
+            cursorRef.current.style.background = `radial-gradient(
+              circle at ${xPercent}% ${yPercent}%,
+              rgba(255, 255, 255, 1) 0%,
+              rgba(255, 255, 255, 1) ${solidGradientStops.solidEnd},
+              rgba(0, 0, 0, 0) ${solidGradientStops.transparentStart}
+            )`;
+          }
         }
         return { x: nextX, y: nextY };
       });
