@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './GradientCursor.scss';
 
+interface Position {
+  x: number;
+  y: number;
+}
+
 const GradientCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [targetPos, setTargetPos] = useState({ x: 0, y: 0 });
-  const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 });
+  const [targetPos, setTargetPos] = useState<Position>({ x: 0, y: 0 });
+  const [currentPos, setCurrentPos] = useState<Position>({ x: 0, y: 0 });
   const animationFrameId = useRef<number | null>(null);
 
   // Faktor smoothing (semakin kecil semakin lambat/halus)
-  const smoothFactor = 0.1;
+  const smoothFactor = 0.2;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -20,7 +25,7 @@ const GradientCursor: React.FC = () => {
 
     // Fungsi untuk update animasi
     const updatePosition = () => {
-      setCurrentPos(prevPos => {
+      setCurrentPos((prevPos: Position) => {
         const dx = targetPos.x - prevPos.x;
         const dy = targetPos.y - prevPos.y;
         const nextX = prevPos.x + dx * smoothFactor;
@@ -32,8 +37,8 @@ const GradientCursor: React.FC = () => {
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
             rgba(40, 0, 80, 0.95) 0%,
-            rgba(40, 0, 80, 0.8) 1%,
-            rgba(40, 0, 80, 0) 2%
+            rgba(40, 0, 80, 0.95) 1%,
+            rgba(40, 0, 80, 0) 1.1%
           )`;
         }
         return { x: nextX, y: nextY };
