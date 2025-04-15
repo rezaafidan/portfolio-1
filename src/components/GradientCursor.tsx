@@ -34,11 +34,14 @@ const GradientCursor: React.FC = () => {
         if (cursorRef.current) {
           const xPercent = (nextX / window.innerWidth) * 100;
           const yPercent = (nextY / window.innerHeight) * 100;
+          // Lingkaran transparan dengan outline ungu semi-bold
           cursorRef.current.style.background = `radial-gradient(
             circle at ${xPercent}% ${yPercent}%,
-            rgba(40, 0, 80, 0.95) 0%,
-            rgba(40, 0, 80, 0.95) 1%,
-            rgba(40, 0, 80, 0) 1.1%
+            rgba(0, 0, 0, 0) 0%,      /* Tengah transparan */
+            rgba(0, 0, 0, 0) 0.5%,    /* Tetap transparan hingga 0.5% */
+            rgba(40, 0, 80, 0.95) 0.6%,/* Tepi dalam outline ungu */
+            rgba(40, 0, 80, 0.95) 1.5%,/* Tetap ungu hingga 1.5% (ketebalan outline) */
+            rgba(40, 0, 80, 0) 1.6%   /* Tepi luar outline (transparan) */
           )`;
         }
         return { x: nextX, y: nextY };
