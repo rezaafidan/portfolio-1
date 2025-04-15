@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom'; // Impor ReactDOM
 import '../assets/styles/Cursor.scss';
 
 const Cursor = () => {
@@ -80,7 +81,13 @@ const Cursor = () => {
         transform: `translate(${outerPosition.x}px, ${outerPosition.y}px) translate(-50%, -50%)`
     };
 
-    return (
+    // Render null jika komponen belum siap atau document.body belum tersedia
+    if (typeof document === 'undefined') {
+        return null;
+    }
+
+    // Gunakan createPortal untuk merender ke document.body
+    return ReactDOM.createPortal(
         <div className={`cursor-container ${isVisible ? 'visible' : ''}`}> 
             <div 
                 className="cursor-outer"
@@ -90,7 +97,8 @@ const Cursor = () => {
                 className="cursor-inner"
                 style={innerStyle}
             />
-        </div>
+        </div>,
+        document.body // Target elemen DOM untuk portal
     );
 };
 
