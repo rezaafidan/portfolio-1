@@ -13,20 +13,27 @@ const Cursor = () => {
             setPosition({ x: e.pageX, y: e.pageY });
         };
 
-        const handleMouseLeave = (e: MouseEvent) => {
-            if (!e.relatedTarget || 
-                !(e.relatedTarget instanceof Element) || 
-                !e.relatedTarget.closest('.expertise-section, .project-section, .timeline-section, .contact-section, .about-section')) {
-                setIsVisible(false);
-            }
+        // Fungsi untuk menyembunyikan cursor saat mouse keluar window
+        const handleMouseLeave = () => {
+            setIsVisible(false);
+        };
+        
+        // Fungsi untuk menampilkan cursor saat mouse masuk window
+        const handleMouseEnter = () => {
+            setIsVisible(true);
         };
 
+        // Listener untuk pergerakan mouse di window
         window.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseleave', handleMouseLeave);
+        // Listener untuk mouse meninggalkan document element
+        document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+        // Listener untuk mouse memasuki document element
+        document.documentElement.addEventListener('mouseenter', handleMouseEnter);
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseleave', handleMouseLeave);
+            document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+            document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
         };
     }, []);
 
