@@ -35,11 +35,11 @@ const GradientCursor: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       setTargetPos({ x: e.clientX, y: e.clientY });
 
-      // Deteksi hover link atau button
+      // Deteksi hover link, button, atau elemen dengan role="button"
       let isHover = false;
       if (e.target instanceof Element) {
-        // Cari elemen interaktif terdekat (link atau button)
-        const closestInteractive = e.target.closest('a[href], button');
+        // Cari elemen interaktif terdekat (link, button, atau role="button")
+        const closestInteractive = e.target.closest('a[href], button, [role="button"]');
         isHover = closestInteractive !== null;
       }
       // Update state jika berubah (Fix linter error dengan tipe eksplisit)
