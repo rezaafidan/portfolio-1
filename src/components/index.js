@@ -5,3 +5,7 @@ export { default as Expertise } from "./Expertise";
 export { default as Timeline } from "./Timeline";
 export { default as Project } from "./Project";
 export { default as Contact } from "./Contact";
+export { default as FadeIn } from "./FadeIn";
+export { default as GradientBackground } from "./GradientBackground";
+export { default as GradientCursor } from "./GradientCursor";
+export { default as FastSolidCursor } from "./FastSolidCursor";

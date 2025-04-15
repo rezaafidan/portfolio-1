@@ -11,6 +11,7 @@ import {
 import FadeIn from './components/FadeIn';
 import GradientBackground from './components/GradientBackground';
 import GradientCursor from './components/GradientCursor';
+import FastSolidCursor from './components/FastSolidCursor';
 // import Cursor from './components/Cursor'; // Sudah dihapus sebelumnya, pastikan tidak ada lagi
 import './index.scss';
 // import './assets/styles/Cursor.scss'; // Sudah dihapus sebelumnya, pastikan tidak ada lagi
@@ -33,6 +34,7 @@ function App() {
     return (
     <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
         <GradientCursor />
+        <FastSolidCursor />
         <GradientBackground />
         <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
         {/* <FadeIn transitionDuration={700}> */} {/* Kembalikan jika diinginkan */}

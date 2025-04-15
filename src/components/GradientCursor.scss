@@ -1,3 +1,28 @@
+/* Style dasar untuk kedua cursor */
+.gradient-cursor-outline,
+.gradient-cursor-solid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  background: transparent; /* Background awal */
+}
+
+/* z-index berbeda agar outline di atas solid jika overlap */
+.gradient-cursor-outline {
+  z-index: 10000;
+}
+
+.gradient-cursor-solid {
+  z-index: 9999; /* Sedikit di bawah outline */
+}
+
+/* Hapus style dark-mode spesifik jika warna putih cocok untuk kedua mode */
+/* Jika ingin warna berbeda untuk light mode, bisa ditambahkan kembali */
+
 .gradient-cursor {
   position: fixed;
   top: 0;
@@ -5,10 +30,25 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 10000;
   mix-blend-mode: difference;
-  background: transparent;
+  z-index: 10000; /* Pastikan tetap di atas */
+  background: transparent; /* Background diatur JS */
 }
 
-/* Hapus style dark-mode spesifik jika warna ungu gelap cocok untuk kedua mode */
-/* Jika ingin warna berbeda untuk light mode, bisa ditambahkan kembali */ 
+/* Pseudo-element untuk solid circle (lebih cepat) */
+.gradient-cursor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* Di bawah outline */
+  background: radial-gradient(
+    circle at var(--solid-cursor-x) var(--solid-cursor-y),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 0.4%, /* solidEnd */
+    rgba(0, 0, 0, 0) 0.5%      /* transparentStart */
+  );
+  /* pointer-events dan mix-blend-mode diwarisi dari parent */
+} 
