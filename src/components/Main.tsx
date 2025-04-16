@@ -16,7 +16,7 @@ function Main() {
           <div className="social_icons">
             <a href="https://www.instagram.com/rezaafidan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} /></a>
             <a href="https://wa.me/6281238900703" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
-            <a href="https://t.me/rezaafidan" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
+            <a href="https://t.me/aifyzaa" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
             <a href="https://www.linkedin.com/in/rezaafidan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
           </div>
           <h1>Reza Afidan</h1>
@@ -25,7 +25,7 @@ function Main() {
           <div className="mobile_social_icons">
             <a href="https://www.instagram.com/rezaafidan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} /></a>
             <a href="https://wa.me/6281238900703" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
-            <a href="https://t.me/rezaafidan" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
+            <a href="https://t.me/aifyzaa" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
             <a href="https://www.linkedin.com/in/rezaafidan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
 
           </div>
