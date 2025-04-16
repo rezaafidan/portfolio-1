@@ -9,7 +9,8 @@ import {
   faSteam, 
   faDiscord,
   faGithub,
-  faLinkedin
+  faLinkedin,
+  faTelegram
 } from '@fortawesome/free-brands-svg-icons';
 import { 
   faCircleExclamation,
@@ -27,6 +28,7 @@ function Footer() {
         <a href="https://www.deviantart.com/rezaafidan" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDeviantart} /></a>
         <a href="https://www.instagram.com/rezaafidan/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram} /></a>
         <a href="https://wa.me/6281238900703" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
+        <a href="https://t.me/aifyzaa" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faTelegram} /></a>
         <a href="https://account.xbox.com/en-us/profile?gamertag=RpMEzaR" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faXbox} /></a>
         <a href="https://osu.ppy.sh/users/9364311" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faCircleExclamation} /></a>
         <a href="https://steamcommunity.com/id/76561199789985658" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faSteam} /></a>
