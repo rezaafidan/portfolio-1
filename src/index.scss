@@ -19,8 +19,12 @@ code {
 
 .main-container {
   position: relative;
-  background-color: #0d1116;
+  background-color: rgba(13, 17, 22, 0.85);
 
+}
+
+.light-mode .main-container {
+  background-color: rgba(248, 249, 250, 0.85);
 }
 
 a {
