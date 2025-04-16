@@ -19,10 +19,8 @@ code {
 
 .main-container {
   position: relative;
-}
+  background-color: #0d1116;
 
-.light-mode .main-container {
-  background-color: rgba(248, 249, 250, 0.2);
 }
 
 a {
@@ -41,6 +39,7 @@ p, a, h1, h2, h3, h4, h5, label, button {
 
 .navigation-bar {
   justify-content: space-between;
+  background-color: #0d1116;
 
   button {
     font-size: 1.1rem;
