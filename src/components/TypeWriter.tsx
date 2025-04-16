@@ -5,7 +5,7 @@ const TypeWriter: React.FC = () => {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
-    const [typingSpeed, setTypingSpeed] = useState(150);
+    const [typingSpeed, setTypingSpeed] = useState(100);
 
     const textArray = [
         "Student at MAN Insan Cendekia Pekalongan",
@@ -15,7 +15,7 @@ const TypeWriter: React.FC = () => {
         "Video Editor",
         "Illustrator",
     ];
-    const period = 2000;
+    const period = 1500;
 
     useEffect(() => {
         let ticker = setInterval(() => {
@@ -36,16 +36,19 @@ const TypeWriter: React.FC = () => {
         setText(updatedText);
 
         if (isDeleting) {
-            setTypingSpeed(prevSpeed => prevSpeed / 2);
+            setTypingSpeed(50);
+        } else {
+            setTypingSpeed(100);
         }
 
         if (!isDeleting && updatedText === fullText) {
-            setIsDeleting(true);
-            setTypingSpeed(period);
+            setTimeout(() => {
+                setIsDeleting(true);
+            }, period);
         } else if (isDeleting && updatedText === '') {
             setIsDeleting(false);
             setLoopNum(loopNum + 1);
-            setTypingSpeed(150);
+            setTypingSpeed(100);
         }
     };
 
