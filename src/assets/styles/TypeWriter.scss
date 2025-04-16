@@ -5,6 +5,8 @@
     font-family: 'Inconsolata', monospace;
     font-weight: 700;
     color: #b388ff;
+    letter-spacing: 0.05em;
+    margin-top: -0.5em;
 }
 
 .cursor {
@@ -19,9 +21,9 @@
 .cursor::after {
     content: '▂';
     font-weight: 700;
-    font-size: 1em;
+    font-size: 0.85em;
     position: relative;
-    bottom: 0.1em;
+    bottom: 0.15em;
 }
 
 @keyframes blink {
