@@ -6,6 +6,7 @@ const TypeWriter: React.FC = () => {
     const [isDeleting, setIsDeleting] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(100);
+    const [isDone, setIsDone] = useState(false);
 
     const textArray = [
         "Student at MAN Insan Cendekia Pekalongan",
@@ -18,39 +19,34 @@ const TypeWriter: React.FC = () => {
     const period = 1500;
 
     useEffect(() => {
-        let ticker = setInterval(() => {
-            tick();
-        }, typingSpeed);
+        const tick = () => {
+            const fullText = textArray[currentIndex];
+            
+            if (!isDeleting && !isDone) {
+                if (text.length < fullText.length) {
+                    setText(fullText.substring(0, text.length + 1));
+                    setTypingSpeed(100);
+                } else {
+                    setIsDone(true);
+                    setTimeout(() => {
+                        setIsDeleting(true);
+                        setIsDone(false);
+                    }, period);
+                }
+            } else if (isDeleting) {
+                if (text.length > 0) {
+                    setText(fullText.substring(0, text.length - 1));
+                    setTypingSpeed(50);
+                } else {
+                    setIsDeleting(false);
+                    setCurrentIndex(prev => (prev + 1) % textArray.length);
+                }
+            }
+        };
 
-        return () => { clearInterval(ticker) };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [text, isDeleting]);
-
-    const tick = () => {
-        const fullText = textArray[currentIndex];
-        const updatedText = isDeleting 
-            ? fullText.substring(0, text.length - 1) 
-            : fullText.substring(0, text.length + 1);
-
-        setText(updatedText);
-
-        if (isDeleting) {
-            setTypingSpeed(50);
-        } else {
-            setTypingSpeed(100);
-        }
-
-        if (!isDeleting && updatedText === fullText) {
-            setTimeout(() => {
-                setIsDeleting(true);
-            }, period);
-        } else if (isDeleting && updatedText === '') {
-            setIsDeleting(false);
-            setCurrentIndex((current) => {
-                return current === textArray.length - 1 ? 0 : current + 1;
-            });
-        }
-    };
+        const ticker = setTimeout(tick, typingSpeed);
+        return () => clearTimeout(ticker);
+    }, [text, isDeleting, currentIndex, isDone, textArray, typingSpeed]);
 
     return (
         <span className="typewriter">
