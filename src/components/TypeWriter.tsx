@@ -4,7 +4,7 @@ import '../assets/styles/TypeWriter.scss';
 const TypeWriter: React.FC = () => {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
-    const [loopNum, setLoopNum] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(100);
 
     const textArray = [
@@ -13,7 +13,7 @@ const TypeWriter: React.FC = () => {
         "Web Developer",
         "Photographer",
         "Video Editor",
-        "Illustrator",
+        "Illustrator"
     ];
     const period = 1500;
 
@@ -27,9 +27,8 @@ const TypeWriter: React.FC = () => {
     }, [text, isDeleting]);
 
     const tick = () => {
-        let i = loopNum % textArray.length;
-        let fullText = textArray[i];
-        let updatedText = isDeleting 
+        const fullText = textArray[currentIndex];
+        const updatedText = isDeleting 
             ? fullText.substring(0, text.length - 1) 
             : fullText.substring(0, text.length + 1);
 
@@ -47,8 +46,9 @@ const TypeWriter: React.FC = () => {
             }, period);
         } else if (isDeleting && updatedText === '') {
             setIsDeleting(false);
-            setLoopNum(loopNum + 1);
-            setTypingSpeed(100);
+            setCurrentIndex((current) => {
+                return current === textArray.length - 1 ? 0 : current + 1;
+            });
         }
     };
 
