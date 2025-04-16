@@ -1,0 +1,30 @@
+.typewriter {
+    font-size: 1.5em;
+    display: inline-block;
+    position: relative;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    margin-left: 5px;
+    background-color: white;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+// Light mode adjustments
+.light-mode .cursor {
+    background-color: #0d1116;
+}
+
+@media (max-width: 768px) {
+    .typewriter {
+        font-size: 1.2em;
+    }
+} 

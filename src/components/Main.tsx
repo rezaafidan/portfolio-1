@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import '../assets/styles/Main.scss';
+import TypeWriter from './TypeWriter';
 
 function Main() {
 
@@ -18,7 +19,7 @@ function Main() {
             <a href="https://www.linkedin.com/in/rezaafidan/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>
           </div>
           <h1>Reza Afidan</h1>
-          <p>Student at MAN Insan Cendekia Pekalongan</p>
+          <p><TypeWriter /></p>
 
           <div className="mobile_social_icons">
             <a href="https://github.com/rezaafidan" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faWhatsapp} /></a>
